@@ -16,6 +16,10 @@ RUN curl -sSL https://get.docker.com/ubuntu/ | sh
 ADD ./wrapdocker /usr/local/bin/wrapdocker
 RUN chmod +x /usr/local/bin/wrapdocker
 
+# Install the AeroFS script
+COPY ./aerofs-docker.sh /usr/local/bin/aerofs-docker.sh
+RUN chmod +x /usr/local/bin/aerofs-docker.sh
+
 # Define additional metadata for our image.
 VOLUME /var/lib/docker
 CMD ["wrapdocker"]
