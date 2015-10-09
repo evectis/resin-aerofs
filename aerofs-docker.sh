@@ -24,7 +24,7 @@ while true; do
 
   [[ "$(docker ps -a | grep ${CONTAINER})" ]] || \
       docker create --name "${CONTAINER}" \
-        -v /var/run/docker.sock:/var/run/docker.sock \
+        -v /var/run/docker-aerofs.sock:/var/run/docker.sock \
         -v /ship/loader/run/repo:/host/ship/loader/run/repo \
         -v /ship/loader/run/tag:/host/ship/loader/run/tag \
         -v /ship/loader/run/target:/host/ship/loader/run/target \
