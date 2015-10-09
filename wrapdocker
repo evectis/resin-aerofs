@@ -111,12 +111,13 @@ rm -rf /var/run/docker.pid
 #	[[ $1 ]] && exec "$@"
 #	exec bash --login
 #fi
-if [ -d "/var/run/docker.sock" ]
+if [ -e "/var/run/docker-aerofs.sock" ]
 then
-	rm -rf /var/run/docker.sock
-	touch /var/run/docker.sock
+	rm -rf /var/run/docker-aerofs.sock
+	touch /var/run/docker-aerofs.sock
 fi
-docker -d $DOCKER_DAEMON_ARGS &
+export DOCKER_HOST=unix:///var/run/docker-aerofs.sock
+docker -d -H $DOCKER_HOST $DOCKER_DAEMON_ARGS &
 (( timeout = 60 + SECONDS ))
 until docker info >/dev/null 2>&1
 do
